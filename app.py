@@ -3,7 +3,6 @@ from datetime import date, time, timedelta, datetime
 from math import sin, cos, tan, atan2, radians, degrees, floor, sqrt, fmod
 import random
 import pandas as pd
-import matplotlib.pyplot as plt
 
 PI = 3.14159265358979323846
 RADEG = 180.0 / PI
@@ -304,7 +303,7 @@ with st.expander("About the Oracle 📖"):
     """)
 
 st.header("Enter Your Details 📝✨")
-name = st.text_input("Full Name 👤", value="Mahan H R Gowda")
+name = st.text_input("Full Name 👤", value="Mahan Ravindra")
 birth_date = st.date_input("Birth Date 📅", value=date(1993, 7, 12), min_value=date(1900,1,1), max_value=date(2100,12,31))
 birth_time = st.time_input("Birth Time (optional, default noon) ⏰", value=time(12, 26), step=timedelta(minutes=1))
 tz_options = [
@@ -406,13 +405,7 @@ if st.button("Consult the Oracle 🌟🔍"):
     
     st.subheader("Luck Waves Timeline 📈🍀")
     df = generate_luck_waves(birth_date, lon)
-    fig, ax = plt.subplots()
-    ax.plot(df['Date'], df['Luck Level (%)'], marker='o', color='purple')
-    ax.set_xlabel('Date 📅')
-    ax.set_ylabel('Luck Level (%) 🍀')
-    ax.set_title('Luck Waves Over Next Month 🌊✨')
-    plt.xticks(rotation=45)
-    st.pyplot(fig)
+    st.line_chart(df.set_index('Date'))
     st.write("   *Explanation:* This chart predicts 'luck waves' based on your birth date and longitude, using a sinusoidal pattern to simulate cosmic echoes. Peaks indicate favorable times for new ventures; dips suggest caution and reflection. It's symbolic—use it as a fun guide! 📊🔮😊")
     
     st.write("**Final Note:** Remember, this oracle is for entertainment, inspiration, and self-reflection. Balance these insights with your own intuition and critical thinking. May your journey be enchanted! 🧠💖🌟")
